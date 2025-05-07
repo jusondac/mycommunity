@@ -21,14 +21,14 @@ end
 
 puts "Creating users..."
 User.create!(
-    email_address: "master@gmail.com",
+    email_address: "user@gmail.com",
     username: "Master",
     password: 'q1w2e3r4',
     password_confirmation: 'q1w2e3r4',
-    role_id: Role.find_by(name: 'Member').id
+    role_id: Role.find_by(name: 'Admin').id
   )
 
-5.times do
+99.times do
   User.create!(
     email_address: Faker::Internet.unique.email,
     username: Faker::Internet.unique.username,
@@ -39,9 +39,9 @@ User.create!(
 end
 
 puts "Creating communities..."
-10.times do
+15.times do
   Community.create!(
-    name: Faker::Company.unique.name,
+    name: Faker::Company.unique.name+" Community",
     descriptions: Faker::Lorem.paragraph(sentence_count: 3)
   )
 end
