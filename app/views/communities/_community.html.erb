@@ -2,7 +2,15 @@
   <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
     <%= community.name %>
   </td>
-  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-    <%= community.descriptions %>
+  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-gray-500">
+    <%= community.descriptions.truncate(30) %>
+  </td>
+  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-gray-500">
+    <div class="flex -space-x-4 rtl:space-x-reverse items-center">
+      <% community.top_three.each do |member| %>
+        <img src="https://randomuser.me/api/portraits/thumb/men/<%= member.id.to_i % 100 %>.jpg" alt="<%= member.username %>" class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800">
+      <% end %>
+      <span class="ml-5"><%= community.total_members %></span>
+    </div>
   </td>
 </div>

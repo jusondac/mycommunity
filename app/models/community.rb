@@ -5,6 +5,15 @@ class Community < ApplicationRecord
   validates :name, presence: true
   validates :descriptions, presence: true
 
+  def total_members
+    count = members.count
+    count >= 10 ? "#{(count / 10) * 10}+" : count.to_s
+  end
+
+  def top_three
+    members.first(3)
+  end
+
   ## update the ransackable below with column you want to add ransack
   def self.ransackable_attributes(auth_object = nil)
     [ "id" ]
