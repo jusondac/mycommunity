@@ -12,6 +12,7 @@ require 'faker'
 # Clear existing data
 Role.destroy_all
 User.destroy_all
+Event.destroy_all
 Community.destroy_all
 
 puts "Creating roles..."
@@ -19,7 +20,7 @@ puts "Creating roles..."
   Role.find_or_create_by!(name: role_name)
 end
 
-puts "Creating users..."
+puts "Creating users... 🎉"
 User.create!(
     email_address: "user@gmail.com",
     username: "Master",
@@ -38,12 +39,23 @@ User.create!(
   )
 end
 
-puts "Creating communities..."
+puts "Creating Community... 🎉"
 15.times do
   Community.create!(
     name: Faker::Company.unique.name+" Community",
     descriptions: Faker::Lorem.paragraph(sentence_count: 3)
   )
+end
+
+puts "Creating events... 🎉"
+Community.all.each do |community|
+  rand(1..4).times do
+    Event.create!(
+      name: Faker::Lorem.sentence(word_count: 3)+" Event",
+      date: Faker::Date.between(from: 3.months.ago, to: Date.today),
+      community: community
+    )
+  end
 end
 
 puts "Seed completed successfully!"

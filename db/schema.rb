@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_07_231255) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_025259) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "date"
+    t.integer "community_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_events_on_community_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -43,5 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_231255) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "events", "communities"
   add_foreign_key "sessions", "users"
 end

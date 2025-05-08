@@ -1,0 +1,11 @@
+<div id=<%= dom_id(event) %>>
+  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <%= event.name %>
+  </td>
+  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <%= event.date.strftime("%B %d, %Y") %>
+  </td>
+  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <%= event.community.name %>
+  </td>
+</div>
