@@ -1,6 +1,6 @@
 <% content_for :title, "Showing event" %>
 <div class="w-full">
-  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+  <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700 sticky top-10 right-0 z-10">
     <div class="w-full mb-1">
       <div class="mb-4">
         <nav class="flex mb-5" aria-label="Breadcrumb">
@@ -19,10 +19,10 @@
         </ol>
       </nav>
       <div class="text-xl flex items-center font-semibold text-gray-900 sm:text-2xl dark:text-white">
-        <%= link_to 'Back', :back, class: "inline-flex mr-5 items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         <div class="flex flex-col items-start">
-          <div><%= @event.name %></div>
-          <div class="text-sm font-normal text-gray-500 dark:text-gray-400"> <%= @event.community.name %></div>
+          <div class="text-5xl"><%= @event.name %></div>
+          <div class="text-xl font-normal text-gray-500 dark:text-gray-400"> <%= link_to @event.community.name, @event.community %></div>
+          <div class="text-xl"><%= @event.date.strftime("%d %b %Y") %>, <%= @event.event_detail.start.strftime("%H:%M") %> - <%= @event.event_detail.finish.strftime("%H:%M") %></div>
         </div>
       </div>
     </div>
@@ -32,6 +32,14 @@
   <div class="w-2/3">
     <section class="bg-white dark:bg-gray-900">
       <div class="py-8 px-4 mx-auto max-w-5xl lg:py-16">
+        <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Detail</h2>
+        <div class="flex flex-wrap mb-4 text-gray-500 dark:text-gray-400">
+          <%= @event.event_detail.descriptions %>
+        </div>
+        <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Price</h2>
+        <div class="flex flex-wrap mb-4 text-gray-500 dark:text-gray-400">
+          $<%= @event.event_detail.price.to_i %>
+        </div>
         <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Organizer</h2>
         <div class="flex flex-wrap mb-4">
           <% @event.event_communities_by_role(1).each do |ec| %>

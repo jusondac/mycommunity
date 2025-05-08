@@ -60,6 +60,19 @@ Community.all.each do |community|
   end
 end
 
+puts "⚙️ Creating Event Detail... "
+Event.all.each do |event|
+  EventDetail.create!(
+    event: event,
+    date: event.date,
+    start: Faker::Time.between(from: 1.year.ago, to: Date.today),
+    finish: Faker::Time.between(from: 1.year.ago, to: Date.today),
+    price: rand(0..100),
+    descriptions: Faker::Lorem.paragraph(sentence_count: 10)
+  )
+end
+
+
 puts "Creating community members... 🎉"
 
 # Ensure all users are members of at least one community

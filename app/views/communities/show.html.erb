@@ -36,18 +36,11 @@
 <div class="w-full">
   <section class="bg-white dark:bg-gray-800">
     <div class="py-4 px-4">
-      <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Members</h2>
-      <div class="flex flex-wrap">
-        <% @community.members.each do |member| %>
-          <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
-            <img src="https://randomuser.me/api/portraits/thumb/men/<%= member.id.to_i % 100 %>.jpg" alt="<%= member.username %>" class="w-8 h-8 rounded-full mr-2 inline-block">
-            <%= link_to member.username, member %>
-          </div>
-        <% end %>
-      </div>
       <dl>
         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt>
-        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory, Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage, Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.</dd>
+        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non in modi nemo placeat possimus ipsam voluptatem veritatis mollitia, suscipit eligendi veniam dolore optio similique vel quisquam adipisci iusto blanditiis. Voluptatem dignissimos recusandae nemo placeat reprehenderit vel ipsum repudiandae exercitationem praesentium id temporibus eligendi cum ad reiciendis cupiditate soluta provident facilis expedita aliquid deleniti explicabo delectus, doloremque, voluptate incidunt. Vero cum nam incidunt sunt sint hic distinctio impedit? Soluta quaerat sed tenetur quisquam saepe debitis autem ea error? Debitis dolor odit nam ratione, aliquam atque sit incidunt sequi libero fugiat ut in minima nisi mollitia dicta vel deserunt corrupti beatae adipisci perferendis! Nobis sint quasi nam nesciunt quibusdam distinctio placeat dolore suscipit temporibus illo. Animi, aliquam. Necessitatibus officiis blanditiis cum tempore! Odit dicta unde temporibus quisquam perferendis aspernatur voluptates assumenda voluptas ea reiciendis, illum tempora nisi ratione dolorem animi provident? Eaque dolore vero odit animi. Reprehenderit, labore accusantium, animi aut tenetur voluptas ullam aliquid nostrum, laudantium repudiandae doloribus inventore asperiores fuga! Rem repellendus magni exercitationem ad molestiae, eligendi, asperiores assumenda hic ullam neque blanditiis laboriosam adipisci nostrum quia voluptas iure doloribus sequi in iste sit ipsa a tempore. Inventore mollitia ipsam, ut quas molestiae sequi adipisci accusamus ratione voluptas asperiores libero?
+        </dd>
       </dl>
       <dl class="flex items-center space-x-6">
         <div>
@@ -59,10 +52,27 @@
           <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
         </div>
         <div>
-  <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Item weight</dt>
-  <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
-</div>
+          <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Item weight</dt>
+          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
+        </div>
       </dl>
+      <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Members</h2>
+      <div class="flex flex-wrap">
+        <% @community.members.each do |member| %>
+          <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
+            <img src="https://randomuser.me/api/portraits/thumb/men/<%= member.id.to_i % 100 %>.jpg" alt="<%= member.username %>" class="w-8 h-8 rounded-full mr-2 inline-block">
+            <%= link_to member.username, member %>
+          </div>
+        <% end %>
+      </div>
+      <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Members</h2>
+      <div class="flex flex-wrap">
+        <% @community.events.each do |events| %>
+          <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
+            <%= link_to events.name, events %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </section>
 </div>

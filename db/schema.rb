@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_083518) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_164506) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
@@ -53,6 +53,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_083518) do
     t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
+  create_table "event_schedules", force: :cascade do |t|
+    t.string "title"
+    t.integer "event_id", null: false
+    t.time "start"
+    t.time "finish"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_schedules_on_event_id"
+    t.index ["user_id"], name: "index_event_schedules_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.datetime "date"
@@ -93,6 +105,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_083518) do
   add_foreign_key "event_communities", "events"
   add_foreign_key "event_communities", "users"
   add_foreign_key "event_details", "events"
+  add_foreign_key "event_schedules", "events"
+  add_foreign_key "event_schedules", "users"
   add_foreign_key "events", "communities"
   add_foreign_key "sessions", "users"
 end
