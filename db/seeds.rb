@@ -62,19 +62,18 @@ end
 
 puts "⚙️ Creating Event Detail... "
 Event.all.each do |event|
+  time =  Faker::Time.between(from: 1.year.ago, to: Date.today),
   EventDetail.create!(
     event: event,
     date: event.date,
-    start: Faker::Time.between(from: 1.year.ago, to: Date.today),
-    finish: Faker::Time.between(from: 1.year.ago, to: Date.today),
+    start: time,
+    finish: time + 2.hours,
     price: rand(0..100),
     descriptions: Faker::Lorem.paragraph(sentence_count: 10)
   )
 end
 
-
 puts "Creating community members... 🎉"
-
 # Ensure all users are members of at least one community
 User.all.each do |user|
   # Each user joins between 1-5 random communities
@@ -145,5 +144,56 @@ Event.all.each do |event|
     )
   end
 end
+
+
+schedule = [
+  "Guest Arrival and Registration",
+  "Opening Remarks",
+  "Welcome Speech by [Speaker Name]",
+  "Main Ceremony Begins",
+  "Special Performance/Presentation",
+  "Closing Speech",
+  "Refreshments and Networking",
+  "Event Concludes"
+]
+
+def calculate_time_intervals(start_time, end_time)
+  (start_time.to_i...end_time.to_i).step(30.minutes).map { |t| Time.at(t) }
+end
+
+Event.all.each do |event|
+  start_time = event.event_detail.start
+  end_time = event.event_detail.finish
+  calculate_time_intervals(start_time, end_time).times do |time|
+    EventSchedule.create!(
+      event: event,
+      start: start_time,
+      finish: start_time + 30.minutes,
+      title: schedule.sample,
+      user: user,
+    )
+  end
+end
+
+# # Example of creating a range of time divided by 30 minutes with titles
+# start_time = Time.now
+# end_time = start_time + 2.hours
+# time_range = start_time..end_time
+
+# # Divide the time range into 30-minute intervals with titles
+# time_intervals_with_titles = []
+# schedule_list = []
+# current_time = start_time
+# while current_time < end_time
+#   interval = { time: current_time, title: "Interval starting at #{current_time.strftime('%H:%M')}" }
+#   time_intervals_with_titles << interval
+#   schedule_list << interval[:title]
+#   current_time += 30.minutes
+# end
+
+# puts "Time intervals with titles: #{time_intervals_with_titles}"
+# puts "Schedule list: #{schedule_list}"
+
+
 
 puts "Seed completed successfully!"
