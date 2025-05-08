@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_033343) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_083518) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
@@ -26,6 +26,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_033343) do
     t.datetime "updated_at", null: false
     t.index ["community_id"], name: "index_community_members_on_community_id"
     t.index ["user_id"], name: "index_community_members_on_user_id"
+  end
+
+  create_table "event_communities", force: :cascade do |t|
+    t.integer "role"
+    t.integer "user_id", null: false
+    t.integer "community_id", null: false
+    t.integer "event_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_event_communities_on_community_id"
+    t.index ["event_id"], name: "index_event_communities_on_event_id"
+    t.index ["user_id"], name: "index_event_communities_on_user_id"
+  end
+
+  create_table "event_details", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "start"
+    t.datetime "finish"
+    t.float "price"
+    t.text "descriptions"
+    t.integer "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_details_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -64,6 +89,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_033343) do
 
   add_foreign_key "community_members", "communities"
   add_foreign_key "community_members", "users"
+  add_foreign_key "event_communities", "communities"
+  add_foreign_key "event_communities", "events"
+  add_foreign_key "event_communities", "users"
+  add_foreign_key "event_details", "events"
   add_foreign_key "events", "communities"
   add_foreign_key "sessions", "users"
 end
