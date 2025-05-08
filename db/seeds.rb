@@ -29,6 +29,21 @@ User.create!(
     role_id: Role.find_by(name: 'Admin').id
   )
 
+  puts "Creating community members... 🎉"
+
+  # Ensure all users are members of at least one community
+  User.all.each do |user|
+    # Each user joins between 1-5 random communities
+    communities = Community.all.sample(rand(1..5))
+    communities.each do |community|
+      CommunityMember.create!(
+        user: user,
+        community: community,
+        joined_at: Faker::Time.between(from: 1.year.ago, to: Date.today)
+      )
+    end
+  end
+
 99.times do
   User.create!(
     email_address: Faker::Internet.unique.email,

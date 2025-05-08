@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   belongs_to :role
   has_many :sessions, dependent: :destroy
-
+  has_many :community, through: :community_members, source: :community
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   before_create :set_default_role

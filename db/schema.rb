@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_025259) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_033343) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "community_members", force: :cascade do |t|
+    t.integer "community_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "joined_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_community_members_on_community_id"
+    t.index ["user_id"], name: "index_community_members_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -52,6 +62,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_025259) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "community_members", "communities"
+  add_foreign_key "community_members", "users"
   add_foreign_key "events", "communities"
   add_foreign_key "sessions", "users"
 end
