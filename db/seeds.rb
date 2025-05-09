@@ -10,6 +10,9 @@
 require 'faker'
 
 # Clear existing data
+puts "Clearing existing data..."
+EventDetail.destroy_all
+EventSchedule.destroy_all
 EventCommunity.destroy_all
 Role.destroy_all
 User.destroy_all
@@ -23,33 +26,32 @@ end
 
 puts "Creating users... 🎉"
 User.create!(
-    email_address: "user@gmail.com",
-    username: "Master",
+  email_address: "user@gmail.com",
+  username: "user",
+  password: 'q1w2e3r4',
+  password_confirmation: 'q1w2e3r4',
+  role_id: Role.find_by(name: 'Admin').id
+)
+
+49.times do
+  User.create!(
+    email_address: Faker::Internet.unique.email,
+    username: Faker::Internet.unique.username,
     password: 'q1w2e3r4',
     password_confirmation: 'q1w2e3r4',
-    role_id: Role.find_by(name: 'Admin').id
+    role_id: Role.find_by(name: 'Member').id
   )
+end
 
-
-  49.times do
-    User.create!(
-      email_address: Faker::Internet.unique.email,
-      username: Faker::Internet.unique.username,
-      password: 'q1w2e3r4',
-      password_confirmation: 'q1w2e3r4',
-      role_id: Role.find_by(name: 'Member').id
-      )
-    end
-
-    puts "Creating Community... 🎉"
-    15.times do
+puts "Creating Community... 🎉"
+5.times do
   Community.create!(
     name: Faker::Company.unique.name+" Community",
     descriptions: Faker::Lorem.paragraph(sentence_count: 3)
   )
 end
 
-puts "Creating events... 🎉"
+puts "⚙️ Creating Community event... "
 Community.all.each do |community|
   rand(1..4).times do
     Event.create!(
@@ -62,18 +64,18 @@ end
 
 puts "⚙️ Creating Event Detail... "
 Event.all.each do |event|
-  time =  Faker::Time.between(from: 1.year.ago, to: Date.today),
+  start = Faker::Time.between(from: event.date.beginning_of_day + 6.hours, to: event.date.beginning_of_day + 18.hours)
   EventDetail.create!(
     event: event,
     date: event.date,
-    start: time,
-    finish: time + 2.hours,
+    start: start,
+    finish: start + 2.hours,
     price: rand(0..100),
     descriptions: Faker::Lorem.paragraph(sentence_count: 10)
   )
 end
 
-puts "Creating community members... 🎉"
+puts "⚙️ Creating Community Member... "
 # Ensure all users are members of at least one community
 User.all.each do |user|
   # Each user joins between 1-5 random communities
@@ -145,7 +147,6 @@ Event.all.each do |event|
   end
 end
 
-
 schedule = [
   "Guest Arrival and Registration",
   "Opening Remarks",
@@ -158,42 +159,30 @@ schedule = [
 ]
 
 def calculate_time_intervals(start_time, end_time)
-  (start_time.to_i...end_time.to_i).step(30.minutes).map { |t| Time.at(t) }
+  intervals = []
+  current_time = start_time
+  while current_time < end_time
+    next_time = [ current_time + 30.minutes, end_time ].min
+    intervals << [ current_time, next_time ]
+    current_time = next_time
+  end
+  intervals
 end
 
+puts "⚙️ Creating Event Schedule... "
 Event.all.each do |event|
   start_time = event.event_detail.start
   end_time = event.event_detail.finish
-  calculate_time_intervals(start_time, end_time).times do |time|
+  user = event.event_communities.where(role: 1).sample.user
+  calculate_time_intervals(start_time, end_time).each do |start, finish|
     EventSchedule.create!(
       event: event,
-      start: start_time,
-      finish: start_time + 30.minutes,
+      start: start,
+      finish: finish,
       title: schedule.sample,
       user: user,
     )
   end
 end
-
-# # Example of creating a range of time divided by 30 minutes with titles
-# start_time = Time.now
-# end_time = start_time + 2.hours
-# time_range = start_time..end_time
-
-# # Divide the time range into 30-minute intervals with titles
-# time_intervals_with_titles = []
-# schedule_list = []
-# current_time = start_time
-# while current_time < end_time
-#   interval = { time: current_time, title: "Interval starting at #{current_time.strftime('%H:%M')}" }
-#   time_intervals_with_titles << interval
-#   schedule_list << interval[:title]
-#   current_time += 30.minutes
-# end
-
-# puts "Time intervals with titles: #{time_intervals_with_titles}"
-# puts "Schedule list: #{schedule_list}"
-
-
 
 puts "Seed completed successfully!"

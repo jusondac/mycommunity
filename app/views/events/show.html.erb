@@ -90,70 +90,19 @@
       <div class="space-y-6 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-900">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Event Detail</h3>
         <ol class="relative ms-3 border-s border-gray-200 dark:border-gray-700">
+          <% @event.event_schedules.each do |schedule| %>
           <li class="mb-10 ms-6">
             <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 ring-2 dark:bg-gray-700 dark:ring-green-500">
             </span>
-            <h4 class="mb-0.5 text-base font-semibold text-gray-900 dark:text-white">Opening</h4>
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400">10.00am - 10.30am</p>
+            <h4 class="mb-0.5 text-base font-semibold text-gray-900 dark:text-white"><%= schedule.title %></h4>
+            <p class="text-sm font-normal text-gray-500 dark:text-gray-400"><%= schedule.start.strftime("%I:%M %p") %> - <%= schedule.finish.strftime("%I:%M %p") %></p>
           </li>
-          <li class="mb-10 ms-6">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 ring-2 dark:bg-gray-700 dark:ring-green-500">
-            </span>
-            <h4 class="mb-0.5 text-base font-semibold text-gray-900 dark:text-white">Closing</h4>
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400">10.00am - 10.30am</p>
-          </li>
-          <li class="mb-10 ms-6">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white dark:bg-gray-700 dark:ring-gray-800">
-              <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
-              </svg>
-            </span>
-            <h4 class="mb-0.5 text-base font-semibold text-gray-900 dark:text-white">Today</h4>
-            <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Products being delivered</p>
-          </li>
-          <li class="mb-10 ms-6 text-primary-700 dark:text-primary-500">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary-100 ring-8 ring-white dark:bg-primary-900 dark:ring-gray-800">
-              <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-              </svg>
-            </span>
-            <h4 class="mb-0.5 font-semibold">23 Nov 2023, 15:15</h4>
-            <p class="text-sm">Products in the courier's warehouse</p>
-          </li>
-          <li class="mb-10 ms-6 text-primary-700 dark:text-primary-500">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary-100 ring-8 ring-white dark:bg-primary-900 dark:ring-gray-800">
-              <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-              </svg>
-            </span>
-            <h4 class="mb-0.5 text-base font-semibold">22 Nov 2023, 12:27</h4>
-            <p class="text-sm">Products delivered to the courier - DHL Express</p>
-          </li>
-          <li class="mb-10 ms-6 text-primary-700 dark:text-primary-500">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary-100 ring-8 ring-white dark:bg-primary-900 dark:ring-gray-800">
-              <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-              </svg>
-            </span>
-            <h4 class="mb-0.5 font-semibold">19 Nov 2023, 10:47</h4>
-            <p class="text-sm">Payment accepted - VISA Credit Card</p>
-          </li>
-          <li class="ms-6 text-primary-700 dark:text-primary-500">
-            <span class="absolute -start-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary-100 ring-8 ring-white dark:bg-primary-900 dark:ring-gray-800">
-              <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-              </svg>
-            </span>
-            <div>
-              <h4 class="mb-0.5 font-semibold">19 Nov 2023, 10:45</h4>
-              <a href="#" class="text-sm font-medium hover:underline">Order placed - Receipt #647563</a>
-            </div>
-          </li>
-        </ol>
-        <div class="w-full flex justify-center">
-          <%= link_to 'Register the event', nil, class:"text-white bg-blue-700 font-bold w-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-        </div>
+        <% end %>
+      </ol>
+      <div class="w-full flex justify-center">
+        <%= link_to 'Register the event', nil, class:"text-white bg-blue-700 font-bold w-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   has_many :event_communities
   has_one :event_detail
+  has_many :event_schedules
   has_many :communities, through: :event_communities
   has_many :event_users, through: :event_communities, source: :user
   belongs_to :community
