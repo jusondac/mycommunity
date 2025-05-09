@@ -24,7 +24,7 @@
           </li>
         </ol>
       </nav>
-      <div class="text-5xl flex items-center font-semibold text-gray-900 dark:text-white">
+      <div class="text-5xl flex items-center font-semibold text-gray-900 dark:text-white ">
         <div class="flex flex-col items-start">
           <div><%= @community.name %></div>
           <div class="text-sm font-normal text-gray-500 dark:text-gray-400"> <%= @community.descriptions %></div>
@@ -34,45 +34,55 @@
   </div>
 </div>
 <div class="w-full">
-  <section class="bg-white dark:bg-gray-800">
-    <div class="py-4 px-4">
-      <dl>
-        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt>
-        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non in modi nemo placeat possimus ipsam voluptatem veritatis mollitia, suscipit eligendi veniam dolore optio similique vel quisquam adipisci iusto blanditiis. Voluptatem dignissimos recusandae nemo placeat reprehenderit vel ipsum repudiandae exercitationem praesentium id temporibus eligendi cum ad reiciendis cupiditate soluta provident facilis expedita aliquid deleniti explicabo delectus, doloremque, voluptate incidunt. Vero cum nam incidunt sunt sint hic distinctio impedit? Soluta quaerat sed tenetur quisquam saepe debitis autem ea error? Debitis dolor odit nam ratione, aliquam atque sit incidunt sequi libero fugiat ut in minima nisi mollitia dicta vel deserunt corrupti beatae adipisci perferendis! Nobis sint quasi nam nesciunt quibusdam distinctio placeat dolore suscipit temporibus illo. Animi, aliquam. Necessitatibus officiis blanditiis cum tempore! Odit dicta unde temporibus quisquam perferendis aspernatur voluptates assumenda voluptas ea reiciendis, illum tempora nisi ratione dolorem animi provident? Eaque dolore vero odit animi. Reprehenderit, labore accusantium, animi aut tenetur voluptas ullam aliquid nostrum, laudantium repudiandae doloribus inventore asperiores fuga! Rem repellendus magni exercitationem ad molestiae, eligendi, asperiores assumenda hic ullam neque blanditiis laboriosam adipisci nostrum quia voluptas iure doloribus sequi in iste sit ipsa a tempore. Inventore mollitia ipsam, ut quas molestiae sequi adipisci accusamus ratione voluptas asperiores libero?
-        </dd>
-      </dl>
-      <dl class="flex items-center space-x-6">
-        <div>
-          <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Electronics/PC</dd>
-        </div>
-        <div>
-          <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Item weight</dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
-        </div>
-        <div>
-          <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Item weight</dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">12kg</dd>
-        </div>
-      </dl>
-      <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Members</h2>
-      <div class="flex flex-wrap">
-        <% @community.members.each do |member| %>
-          <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
-            <img src="https://randomuser.me/api/portraits/thumb/men/<%= member.id.to_i % 100 %>.jpg" alt="<%= member.username %>" class="w-8 h-8 rounded-full mr-2 inline-block">
-            <%= link_to member.username, member %>
-          </div>
-        <% end %>
+  <section class="h-screen bg-white dark:bg-gray-800">
+    <div class="">
+      <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+          <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Detail</button>
+          </li>
+          <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Event</button>
+          </li>
+          <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Member</button>
+          </li>
+          <li role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Subscriber</button>
+          </li>
+        </ul>
       </div>
-      <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Event created</h2>
-      <div class="flex flex-wrap">
-        <% @community.events.each do |events| %>
-          <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
-            <%= link_to events.name, events %>
+      <div id="default-tab-content">
+        <!-- Detail -->
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis amet ad ducimus eum nostrum suscipit eos, adipisci, excepturi impedit consequuntur aperiam eligendi! Velit modi nesciunt tenetur quisquam itaque. Aliquam, similique.</p>
           </div>
-        <% end %>
+          <!-- Event -->
+          <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+            <div class="flex flex-wrap">
+              <% @community.events.each do |events| %>
+                <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
+                  <%= link_to events.name, events %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- Member -->
+          <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+            <div class="flex flex-wrap">
+              <% @community.members.each do |member| %>
+                <div class="px-4 py-2 mr-2 mb-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-white">
+                  <img src="https://randomuser.me/api/portraits/thumb/men/<%= member.id.to_i % 100 %>.jpg" alt="<%= member.username %>" class="w-8 h-8 rounded-full mr-2 inline-block">
+                  <%= link_to member.username, member %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- Subscriber -->
+          <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+            <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>

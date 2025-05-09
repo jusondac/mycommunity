@@ -7,9 +7,13 @@ class Community < ApplicationRecord
   validates :name, presence: true
   validates :descriptions, presence: true
 
-  def total_members
-    count = members.count
-    count >= 10 ? "#{(count / 10) * 10}+" : count.to_s
+
+
+  %i[members events].each do |association|
+    define_method("total_#{association}") do
+      count = send(association).count
+      count >= 10 ? "#{(count / 10) * 10}+" : count.to_s
+    end
   end
 
   def top_three
