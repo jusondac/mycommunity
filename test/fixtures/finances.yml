@@ -5,9 +5,11 @@ one:
   description: MyText
   price: 1.5
   period: 1
+  balance: 1.5
 
 two:
   community: two
   description: MyText
   price: 1.5
   period: 1
+  balance: 1.5

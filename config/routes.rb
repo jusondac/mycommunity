@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :financials
+  resources :finances
   resources :events
   resources :users
   resources :communities

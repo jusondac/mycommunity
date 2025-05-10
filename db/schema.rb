@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_10_011801) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_10_031623) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
@@ -74,14 +74,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_011801) do
     t.index ["community_id"], name: "index_events_on_community_id"
   end
 
-  create_table "financials", force: :cascade do |t|
+  create_table "finances", force: :cascade do |t|
     t.integer "community_id", null: false
     t.text "description"
     t.float "price"
     t.integer "period"
+    t.float "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["community_id"], name: "index_financials_on_community_id"
+    t.index ["community_id"], name: "index_finances_on_community_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -118,6 +119,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_011801) do
   add_foreign_key "event_schedules", "events"
   add_foreign_key "event_schedules", "users"
   add_foreign_key "events", "communities"
-  add_foreign_key "financials", "communities"
+  add_foreign_key "finances", "communities"
   add_foreign_key "sessions", "users"
 end
