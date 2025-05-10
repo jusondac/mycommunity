@@ -10,6 +10,7 @@ class FinancesController < ApplicationController
 
   # GET /finances/1
   def show
+    @pagy, @members = pagy(@finance.community.members, limit: 7)
   end
 
   # GET /finances/new

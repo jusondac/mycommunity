@@ -1,6 +1,7 @@
 class CommunityFinance < ApplicationRecord
   belongs_to :payment
   belongs_to :community
+  belongs_to :user
   # Validations
 
   ## update the ransackable below with column you want to add ransack
