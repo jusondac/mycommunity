@@ -11,6 +11,7 @@ require 'faker'
 
 # Clear existing data
 puts "Clearing existing data..."
+Finance.destroy_all
 EventDetail.destroy_all
 EventSchedule.destroy_all
 EventCommunity.destroy_all
@@ -48,6 +49,13 @@ puts "Creating Community... 🎉"
   community = Community.create!(
     name: Faker::Company.unique.name+" Community",
     descriptions: Faker::Lorem.paragraph(sentence_count: 3)
+  )
+  Finance.create!(
+    community: community,
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    price: rand(0..100),
+    period: rand(0..2),
+    balance: rand(1000..10000),
   )
 end
 
