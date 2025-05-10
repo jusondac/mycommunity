@@ -6,12 +6,9 @@
     <%= finance.description %>
   </td>
   <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white">
-    <%= to_price(finance.price) %>
-  </td>
-  <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-gray-400">
-    <%= finance.period %>
+    <span class="text-green-600"><%= to_price(finance.price) %></span>/<%= finance.period.gsub("ly","") %>
   </td>
   <td class="p-4 text-base font-bold text-gray-900 whitespace-nowrap dark:text-white">
-    <%= to_price(finance.balance) %>
+    <div class="text-green-600"><%= to_price(finance.balance) %></div>
   </td>
 </div>

@@ -1,12 +1,12 @@
 class Community < ApplicationRecord
   has_many :community_members
   has_many :event_communities
+  has_one :finance
   has_many :events, through: :event_communities
   has_many :members, through: :community_members, source: :user
   # Validations
   validates :name, presence: true
   validates :descriptions, presence: true
-
 
 
   %i[members events].each do |association|

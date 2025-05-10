@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.text_field :community_id, placeholder: "community_id", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": finance.errors[:community_id].none?, "border-red-400 focus:outline-red-600": finance.errors[:community_id].any?}] %>
+    <%= form.collection_select :community_id, Community.all, :id, :name, { prompt: "Select a community" }, class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": finance.errors[:community_id].none?, "border-red-400 focus:outline-red-600": finance.errors[:community_id].any?}] %>
   </div>
 
   <div>
@@ -24,7 +24,7 @@
   </div>
 
   <div>
-    <%= form.number_field :period, placeholder: "period", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": finance.errors[:period].none?, "border-red-400 focus:outline-red-600": finance.errors[:period].any?}] %>
+    <%= form.select :period, Finance.periods.keys.map { |key| [key.humanize, key] }, { prompt: "Select a period" }, class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": finance.errors[:period].none?, "border-red-400 focus:outline-red-600": finance.errors[:period].any?}] %>
   </div>
 
   <div>
