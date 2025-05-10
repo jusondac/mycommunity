@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :financials
   resources :events
   resources :users
   resources :communities

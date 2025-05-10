@@ -45,7 +45,7 @@ end
 
 puts "Creating Community... 🎉"
 5.times do
-  Community.create!(
+  community = Community.create!(
     name: Faker::Company.unique.name+" Community",
     descriptions: Faker::Lorem.paragraph(sentence_count: 3)
   )
