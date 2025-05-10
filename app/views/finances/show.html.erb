@@ -27,7 +27,7 @@
       <div class="text-5xl flex items-center font-semibold text-gray-900 dark:text-white ">
         <div class="flex flex-col items-start w-full">
           <div class="flex items-center justify-between w-full">
-            <div><%= @finance.community.name %></div>
+            <div><%= link_to @finance.community.name, @finance.community %></div>
             <div class="dark:text-green-500"><%= to_price(@finance.balance) %></div>
           </div>
           <div class="w-full flex justify-between">
