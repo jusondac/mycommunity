@@ -8,6 +8,7 @@ class Community < ApplicationRecord
   validates :name, presence: true
   validates :descriptions, presence: true
 
+  scope :my_community, -> { where(id: CommunityMember.where(user_id: Current.user.id).select(:community_id)) }
 
   %i[members events].each do |association|
     define_method("total_#{association}") do

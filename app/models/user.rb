@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   belongs_to :role
+  delegate :name, to: :role, prefix: true
   has_many :sessions, dependent: :destroy
   has_many :community_members, dependent: :destroy
   has_many :community, through: :community_members, source: :community
@@ -13,7 +14,7 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "email", "username" ]
+    [ "email_address", "username" ]
   end
 
   def self.ransackable_associations(auth_object = nil)

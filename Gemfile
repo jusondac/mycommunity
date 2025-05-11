@@ -71,3 +71,5 @@ gem "faker", "~> 3.5"
 
 gem "awesome_print", "~> 1.9"
 gem "byebug", "~> 12.0"
+
+gem "cancancan", "~> 3.6"

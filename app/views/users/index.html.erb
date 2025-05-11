@@ -26,9 +26,9 @@
     <div class="items-center justify-between block sm:flex">
       <div class="flex items-center mb-4 sm:mb-0">
         <%= search_form_for @q, html: { class: "sm:pr-3 flex gap-2" } do |f| %>
-          <%= f.label :id_cont, class: "sr-only" %>
+          <%= f.label :username_or_email_address_cont, class: "sr-only" %>
           <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-            <%= f.search_field :username_cont, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", placeholder: "Search for users" %>
+            <%= f.search_field :username_or_email_address_cont, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500", placeholder: "Search for users" %>
           </div>
         <% end %>
         <div class="flex items-center w-full sm:justify-end">
@@ -151,7 +151,7 @@
           <% end %>
         <% else %>
           <tr>
-            <td colspan="3" class="bg-gray-800">
+            <td colspan="6" class="bg-gray-800">
               <div class="flex justify-center items-center py-6 gap-5">
                 <p class="text-center font-bold">No users found.</p>
               </div>

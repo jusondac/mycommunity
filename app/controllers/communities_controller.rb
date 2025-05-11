@@ -3,7 +3,8 @@ class CommunitiesController < ApplicationController
 
   # GET /communities
   def index
-    @q = Community.ransack(params[:q])
+    @q = Community.ransack(params[:q]) if Current.user.role_name.eql?("Admin")
+    @q = Community.my_community.ransack(params[:q]) if Current.user.role_name.eql?("Member")
     @pagy, @communities = pagy(@q.result(distinct: true).order(created_at: :desc))
     @community_form = Community.new
   end
