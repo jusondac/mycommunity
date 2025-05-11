@@ -1,7 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :role
-  delegate :name, to: :role, prefix: true
+  # belongs_to :role
+  # delegate :name, to: :role, prefix: true
+
+  enum :role, [:admin, :member, :guest]
+
   has_many :sessions, dependent: :destroy
   has_many :community_members, dependent: :destroy
   has_many :community, through: :community_members, source: :community

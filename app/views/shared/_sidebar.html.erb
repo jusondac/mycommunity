@@ -8,10 +8,11 @@
             <%= submit_tag "Go", class: "ml-2 px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
           <% end %>
         </li>
-        <% if Current.user.role.name.eql?("Admin") %>
+        <% if Current.user.admin? %>
           <%= render 'shared/sidebar_menu/admin' %>
+        <% elsif Current.user.member? %>
+          <%= render 'shared/sidebar_menu/member' %>
         <% end %>
-        
       </ul>
     </div>
     <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-white lg:flex dark:bg-gray-800" sidebar-bottom-menu="">
