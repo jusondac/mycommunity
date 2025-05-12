@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   resources :users
   resources :communities do
     collection do
+      get :set_community_session
       get :events
       get :members
     end
   end
-  resources :roles
+  resources :roles1
   get "home/index"
   root "home#index"
   get "registrations/new"

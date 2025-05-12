@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
+    session[:community] = nil
     redirect_to new_session_path, notice: "Successfully signed out!"
   end
 end

@@ -2,12 +2,6 @@
   <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
       <ul class="space-y-2 font-medium pt-5">
-        <li>
-          <%= form_tag communities_path, method: :get, class: "flex items-center p-2 text-gray-900 rounded-lg dark:text-white group" do %>
-            <%= select_tag :community_id, options_from_collection_for_select(Community.all, :id, :name), prompt: "Select a community", class: "block w-full px-3 py-2 text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" %>
-            <%= submit_tag "Go", class: "ml-2 px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-          <% end %>
-        </li>
         <% if Current.user.admin? %>
           <%= render 'shared/sidebar_menu/admin' %>
         <% elsif Current.user.member? %>

@@ -18,6 +18,11 @@ class CommunitiesController < ApplicationController
     @pagy_members, @members = pagy(@community.members.ransack(params[:q]).result(distinct: true).order(created_at: :desc), limit: 5)
   end
 
+  def set_community_session
+    session[:community] = Community.find(params[:community_id])
+    redirect_to root_path, notice: "Community was successfully set."
+  end
+
   # GET /communities/new
   def new
     @community = Community.new
