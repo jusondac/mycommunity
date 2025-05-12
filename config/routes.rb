@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   resources :finances
   resources :events
   resources :users
-  resources :communities
+  resources :communities do
+    collection do
+      get :events
+      get :members
+    end
+  end
   resources :roles
   get "home/index"
   root "home#index"

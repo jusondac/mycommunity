@@ -9,6 +9,8 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
 
+  enum :status, %i[upcoming ongoing completed], default: :upcoming
+
   def event_communities_by_role(role)
     event_communities.where(role: role)
   end

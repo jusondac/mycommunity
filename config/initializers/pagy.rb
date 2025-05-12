@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 require "pagy/extras/pagy"
+require "pagy/extras/overflow"
 
 # Pagy initializer file (9.3.3)
 # Customize only what you really need and notice that the core Pagy works also without any of the following lines.
@@ -12,6 +14,7 @@ require "pagy/extras/pagy"
 # Pagy.new|Pagy::Countless.new|Pagy::Calendar::*.new or any of the #pagy* controller methods
 # Here are the few that make more sense as DEFAULTs:
 Pagy::DEFAULT[:limit]       = 10                    # default
+Pagy::DEFAULT[:overflow] = :exception  # or :empty_page or :exception
 # Pagy::DEFAULT[:size]        = 7                     # default
 # Pagy::DEFAULT[:ends]        = true                  # default
 # Pagy::DEFAULT[:page_param]  = :page                 # default

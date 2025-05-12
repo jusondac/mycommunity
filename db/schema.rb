@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_11_163525) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_12_034619) do
   create_table "communities", force: :cascade do |t|
     t.string "name"
     t.text "descriptions"
@@ -82,6 +82,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_11_163525) do
     t.integer "community_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["community_id"], name: "index_events_on_community_id"
   end
 

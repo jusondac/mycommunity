@@ -3,14 +3,19 @@ class CommunitiesController < ApplicationController
 
   # GET /communities
   def index
-    @q = Community.ransack(params[:q]) if Current.user.admin?
-    @q = Community.my_community.ransack(params[:q]) if Current.user.admin?.eql?("Member")
+    @q = Current.user.admin? ? Community.ransack(params[:q]) : Community.my_community.ransack(params[:q])
     @pagy, @communities = pagy(@q.result(distinct: true).order(created_at: :desc))
     @community_form = Community.new
   end
 
   # GET /communities/1
   def show
+    @q = @community.events.ransack(params[:q])
+    @pagy_all, @all_events = pagy(@q.result(distinct: true).order(created_at: :desc), limit: 5)
+    @pagy_upcoming, @upcoming_events = pagy(@q.result(distinct: true).where(status: "upcoming").order(created_at: :desc), limit: 5)
+    @pagy_ongoing, @ongoing_events = pagy(@q.result(distinct: true).where(status: "ongoing").order(created_at: :desc), limit: 5)
+    @pagy_completed, @completed_events = pagy(@q.result(distinct: true).where(status: "completed").order(created_at: :desc), limit: 5)
+    @pagy_members, @members = pagy(@community.members.ransack(params[:q]).result(distinct: true).order(created_at: :desc), limit: 5)
   end
 
   # GET /communities/new

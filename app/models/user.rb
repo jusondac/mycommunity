@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # belongs_to :role
   # delegate :name, to: :role, prefix: true
 
-  enum :role, [:admin, :member, :guest]
+  enum :role, [ :admin, :member ]
 
   has_many :sessions, dependent: :destroy
   has_many :community_members, dependent: :destroy
